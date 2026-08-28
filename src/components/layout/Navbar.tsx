@@ -227,29 +227,31 @@ export const Navbar = () => {
             cat.sections && activeMega === cat.name ? (
               <motion.div
                 key={cat.name}
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
-                transition={{ duration: 0.18, ease: "easeOut" }}
-                className="absolute left-0 right-0 top-full bg-white shadow-lg border-t border-gray-100 z-50"
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute left-0 right-0 top-full bg-white shadow-[0_24px_48px_-12px_rgba(0,0,0,0.18)] border-t-2 border-[#C8A97E] z-50"
                 onMouseEnter={() => handleMegaEnter(cat.name)}
                 onMouseLeave={handleMegaLeave}
               >
-                <div className="max-w-screen-2xl mx-auto px-12 py-6 flex gap-6">
-                  <div className="flex-1 grid grid-cols-3 gap-6">
+                <div className="max-w-screen-2xl mx-auto px-12 py-10 flex gap-12">
+                  <div className="flex-1 grid grid-cols-3 gap-10">
                     {cat.sections.map((sec) => (
                       <div key={sec.title}>
-                        <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#C8A97E] mb-2 pb-1 border-b border-gray-100">
+                        <h4 className="flex items-center gap-3 text-xs uppercase tracking-[0.28em] font-bold text-black mb-5">
                           {sec.title}
+                          <span className="flex-1 h-px bg-gradient-to-r from-[#C8A97E] to-transparent" />
                         </h4>
-                        <ul className="space-y-1.5">
+                        <ul className="space-y-3">
                           {sec.items.map((item) => (
                             <li key={item.name}>
                               <Link
                                 href={item.href}
-                                className="text-[11px] text-gray-500 hover:text-black font-sans transition-colors block"
                                 onClick={() => setActiveMega(null)}
+                                className="group/item flex items-center text-sm text-gray-500 hover:text-black font-sans transition-colors duration-200"
                               >
+                                <span className="w-0 h-px bg-[#C8A97E] transition-all duration-300 group-hover/item:w-4 group-hover/item:mr-2 shrink-0" />
                                 {item.name}
                               </Link>
                             </li>
@@ -261,18 +263,24 @@ export const Navbar = () => {
                   {cat.promo && (
                     <Link
                       href={cat.promo.href}
-                      className="w-36 relative overflow-hidden group shrink-0 min-h-[140px]"
                       onClick={() => setActiveMega(null)}
+                      className="group relative w-64 shrink-0 overflow-hidden"
                     >
-                      <img
-                        src={cat.promo.image}
-                        alt={cat.promo.title}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
-                      <div className="absolute bottom-4 left-4 text-white">
-                        <p className="text-[9px] uppercase tracking-widest font-bold">{cat.promo.title}</p>
-                        <p className="text-sm font-display mt-1 leading-tight">{cat.promo.subtitle}</p>
+                      <div className="relative h-full min-h-[220px]">
+                        <img
+                          src={cat.promo.image}
+                          alt={cat.promo.title}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-all duration-500" />
+                        <div className="absolute bottom-5 left-5 right-5 text-white">
+                          <p className="text-[10px] uppercase tracking-[0.25em] font-bold">{cat.promo.title}</p>
+                          <p className="text-xl font-display mt-2 leading-tight">{cat.promo.subtitle}</p>
+                          <span className="inline-flex items-center gap-2 mt-3 text-[10px] uppercase tracking-widest font-bold text-[#C8A97E]">
+                            Explore
+                            <span className="w-5 h-px bg-[#C8A97E] transition-all duration-300 group-hover:w-8" />
+                          </span>
+                        </div>
                       </div>
                     </Link>
                   )}
